@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text to Binary Converter</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #e9ecef;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #495057;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            border: 1px solid #dee2e6;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            color: #343a40;
+            margin-bottom: 20px;
+            font-size: 2em;
+            font-weight: 600;
+        }
+
+        input, textarea {
+            width: calc(100% - 22px);
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            font-size: 1em;
+            box-sizing: border-box;
+        }
+
+        input {
+            background-color: #f8f9fa;
+            transition: background-color 0.3s;
+        }
+
+        input:focus {
+            background-color: #ffffff;
+            border-color: #007bff;
+            outline: none;
+        }
+
+        textarea {
+            resize: vertical;
+            height: 200px;
+            overflow: auto;
+        }
+
+        button {
+            padding: 12px 24px;
+            font-size: 1em;
+            color: #ffffff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            margin: 10px 5px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            background-color: #004085;
+            transform: translateY(0);
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 600px) {
+            input, textarea, button {
+                width: 100%;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Text to Binary Converter</h1>
+        <input type="text" id="inputText" placeholder="Enter text here...">
+        <div class="button-container">
+            <button onclick="convertToBinary()">Convert to Binary</button>
+            <button onclick="copyBinary()">Copy Text</button>
+        </div>
+        <h2>Binary Code:</h2>
+        <textarea id="binaryOutput" readonly></textarea>
+    </div>
+
+    <script>
+        function convertToBinary() {
+            let text = document.getElementById("inputText").value;
+            let binaryResult = "";
+
+            for (let i = 0; i < text.length; i++) {
+                binaryResult += text[i].charCodeAt(0).toString(2).padStart(8, '0') + " ";
+            }
+
+            document.getElementById("binaryOutput").value = binaryResult.trim();
+        }
+
+        function copyBinary() {
+            let binaryOutput = document.getElementById("binaryOutput");
+            binaryOutput.select();
+            binaryOutput.setSelectionRange(0, 99999); // For mobile devices
+            document.execCommand("copy");
+            alert("Binary code copied to clipboard!");
+        }
+    </script>
+</body>
+</html>
